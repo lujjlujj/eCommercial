@@ -3,6 +3,6 @@ jdk:
 - oraclejdk8
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.host.url=https://sonarqube.com
-  -Dsonar.login=$SONAR_QUBE_TOKEN
+  -Dsonar.login=a93ae603a2525ce7524f9b71824aaf825ff6e35a
 notifications:
   email: false
