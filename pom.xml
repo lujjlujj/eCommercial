@@ -14,9 +14,27 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.1.RELEASE</version>
+		<version>1.5.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
+	<organization>
+		<name>eCommercial</name>
+		<url>https://github.com/lujjlujj/eCommercial</url>
+	</organization>
+	<scm>
+		<url>https://github.com/lujjlujj/eCommercial</url>
+	</scm>
+	<developers>
+		<developer>
+			<id>lujjlujj</id>
+			<name>Terry LU</name>
+			<email>lujunjie400428 at 126 dot com</email>
+			<roles>
+				<role>I don't know</role>
+			</roles>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

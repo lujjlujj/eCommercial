@@ -1,4 +1,4 @@
-package com.tgroup.controller;
+package com.ecommercial.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
