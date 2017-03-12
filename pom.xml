@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.tgroup</groupId>
-	<artifactId>tblog</artifactId>
+	<groupId>com.ebuy</groupId>
+	<artifactId>ebuy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>tblog</name>
-	<description>Demo project for Spring Boot</description>
+	<name>ebuy</name>
+	<description>ebuy project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -19,11 +19,11 @@
 	</parent>
 
 	<organization>
-		<name>eCommercial</name>
-		<url>https://github.com/lujjlujj/eCommercial</url>
+		<name>ebuy</name>
+		<url>https://github.com/lujjlujj/ebuy</url>
 	</organization>
 	<scm>
-		<url>https://github.com/lujjlujj/eCommercial</url>
+		<url>https://github.com/lujjlujj/ebuy</url>
 	</scm>
 	<developers>
 		<developer>

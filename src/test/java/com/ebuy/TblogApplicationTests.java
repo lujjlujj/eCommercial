@@ -1,4 +1,4 @@
-package com.ecommercial;
+package com.ebuy;
 
 import junit.framework.TestCase;
 import org.junit.Test;
