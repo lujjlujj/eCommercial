@@ -41,7 +41,7 @@ public class ELKIndexCreator {
 
     private HttpClient httpClient = new HttpClient();
 
-    @Test
+    //@Test
     public void createIndex() throws JSONException, HttpException, IOException {
         PutMethod putMethod = new PutMethod(URL + INDEX_NAME);
         JSONObject masterObject = new JSONObject();
@@ -56,21 +56,21 @@ public class ELKIndexCreator {
         System.out.println(putMethod.getResponseBodyAsString());
     }
 
-    @Test
+    //@Test
     public void getIndex() throws HttpException, IOException {
         GetMethod getMethod = new GetMethod(URL + INDEX_NAME);
         httpClient.executeMethod(getMethod);
         System.out.println(getMethod.getResponseBodyAsString());
     }
 
-    @Test
+    //@Test
     public void deleteIndex() throws HttpException, IOException {
         DeleteMethod deleteMethod = new DeleteMethod(URL + INDEX_NAME);
         httpClient.executeMethod(deleteMethod);
         System.out.println(deleteMethod.getResponseBodyAsString());
     }
 
-    @Test
+    //@Test
     public void updateIndexMapping() throws JSONException, HttpException,
             IOException {
         PutMethod putMethod = new PutMethod(URL + INDEX_NAME + "/_mapping/"
@@ -91,7 +91,7 @@ public class ELKIndexCreator {
         System.out.println(putMethod.getResponseBodyAsString());
     }
 
-    @Test
+    //@Test
     public void getIndexMapping() throws HttpException, IOException {
         GetMethod getMethod = new GetMethod(URL + INDEX_NAME + "/_mapping/"
                 + TYPE_NAME + "?pretty");
@@ -100,7 +100,7 @@ public class ELKIndexCreator {
 
     }
 
-    @Test
+    //Test
     public void insertDocument() throws Exception{
         PostMethod postMethod = new PostMethod(URL + INDEX_NAME + "/"
                 + TYPE_NAME + "?pretty");
