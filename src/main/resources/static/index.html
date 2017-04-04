@@ -110,7 +110,7 @@
                     <md-content layout-padding>
                         <form name="eventForm">
                             <div layout-gt-sm="row" layout-align="left">
-                                <a href="http://115.28.47.100:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-6M,mode:quick,to:now))&_a=(columns:!(_source),index:process-event-log,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!(startDate,desc))">Process Event Log Dashboard</a>
+                                <a href="http://115.28.47.100:5601/app/kibana#/dashboard/Process-Event-Dashboard?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-30d,mode:quick,to:now))&_a=(filters:!(),options:(darkTheme:!f),panels:!((col:1,id:Operator-Task-Processing-Summary-Report,panelIndex:1,row:5,size_x:12,size_y:3,type:visualization),(col:1,id:Priority-Statistic-Report,panelIndex:2,row:3,size_x:6,size_y:2,type:visualization),(col:7,id:Task-Daily-Volume-Report,panelIndex:3,row:3,size_x:6,size_y:2,type:visualization),(col:1,id:Outstanding-Task-Daily-Report,panelIndex:4,row:1,size_x:12,size_y:2,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:'Process%20Event%20Dashboard',uiState:(P-1:(vis:(params:(sort:(columnIndex:!n,direction:!n))))))">Process Event Log Dashboard</a>
                             </div>
 
                             <div layout-gt-sm="row">
@@ -121,7 +121,14 @@
 
                                 <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
                                     <label>Task Name:</label>
-                                    <input ng-model="event.taskName" required>
+                                    <!--input ng-model="event.taskName" required-->
+                                    <md-select ng-model="event.taskName" required>
+                                        <md-option value="Data Capture">Data Capture</md-option>
+                                        <md-option value="Verification">Verification</md-option>
+                                        <md-option value="Approval">Approval</md-option>
+                                        <md-option value="Review">Review</md-option>
+                                        <md-option value="Onboarding">Onboarding</md-option>
+                                    </md-select>
                                 </md-input-container>
                             </div>
 
@@ -137,7 +144,14 @@
 
                                 <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
                                     <label>Action by:</label>
-                                    <input ng-model="event.actionBy" required>
+                                    <!--input ng-model="event.actionBy" required-->
+                                    <md-select ng-model="event.actionBy" required>
+                                        <md-option value="Jimmy">Jimmy</md-option>
+                                        <md-option value="Amy">Amy</md-option>
+                                        <md-option value="Kitty">Kitty</md-option>
+                                        <md-option value="Cherry">Cherry</md-option>
+                                        <md-option value="Bobby">Bobby</md-option>
+                                    </md-select>
                                 </md-input-container>
                             </div>
 
