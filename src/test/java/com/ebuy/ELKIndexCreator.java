@@ -18,10 +18,10 @@ import java.io.UnsupportedEncodingException;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.*;
-import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
+import org.springframework.util.StringUtils;
 
 /**
  * <b><code>ELKIndexCreator</code></b>
@@ -125,11 +125,11 @@ public class ELKIndexCreator {
             String format) throws JSONException {
         JSONObject property = new JSONObject();
         property.put("type", type);
-        if (StringUtils.isNotBlank(index)) {
+        if (!StringUtils.isEmpty(index)) {
             property.put("index", index);
             property.put("store", true);
         }
-        if (StringUtils.isNotBlank(format)) {
+        if (!StringUtils.isEmpty(format)) {
             property.put("format", format);
         }
         return property;

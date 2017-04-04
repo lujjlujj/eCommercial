@@ -109,6 +109,10 @@
 
                     <md-content layout-padding>
                         <form name="eventForm">
+                            <div layout-gt-sm="row" layout-align="left">
+                                <a href="http://115.28.47.100:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-6M,mode:quick,to:now))&_a=(columns:!(_source),index:process-event-log,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!(startDate,desc))">Process Event Log Dashboard</a>
+                            </div>
+
                             <div layout-gt-sm="row">
                                 <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
                                     <label>Task ID:</label>
