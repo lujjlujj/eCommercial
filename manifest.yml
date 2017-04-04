@@ -1,0 +1,6 @@
+---
+applications:
+- name: ebuy
+  memory: 1G
+  path: target/ebuy-1.0.0.war
+  instances: 1
