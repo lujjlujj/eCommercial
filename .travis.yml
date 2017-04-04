@@ -10,9 +10,9 @@ deploy:
   provider: cloudfoundry
   api: https://api.run.pivotal.io
   username: lujunjie400428@126.com
-  password:
+  password: Itage123!
     secure:
-  organization: lujjlujj
+  organization: terrylu.org
   space: development
   on:
     repo: lujjlujj/ebuy
