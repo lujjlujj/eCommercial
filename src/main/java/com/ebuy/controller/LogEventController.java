@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.UUID;
+
 /**
  * Created by Terry on 17-3-11.
  */
@@ -50,7 +52,7 @@ public class LogEventController {
             PostMethod postMethod = new PostMethod(URL + INDEX_NAME + "/"
                     + TYPE_NAME + "?pretty");
             JSONObject propertyObject = new JSONObject();
-            propertyObject.put("taskId", webEventData.getTaskId());
+            propertyObject.put("taskId", UUID.randomUUID());
             propertyObject.put("taskName", webEventData.getTaskName());
             propertyObject.put("priority", webEventData.getPriority());
             propertyObject.put("startDate", webEventData.getStartDate());
