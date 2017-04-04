@@ -21,14 +21,143 @@
                             .accentPalette('green');
 
         });
+
+        app.controller('FormCtrl', function($scope, $timeout, $mdSidenav, $http, $mdDialog) {
+                $scope.toggleLeft = buildToggler('left');
+                $scope.toggleRight = buildToggler('right');
+                $scope.cleanAllInput = function() {
+                    $scope.event = {
+                        taskId: '',
+                        taskName: '',
+                        startDate: '',
+                        completionDate: '',
+                        priority: '',
+                        actionBy: ''
+                    };
+                }
+                $scope.showAlert = function(Title, TextContent) {
+                    $mdDialog.show(
+                                $mdDialog.alert()
+                                    .parent(angular.element(document.querySelector('#appForm')))
+                                    .clickOutsideToClose(true)
+                                    .title(Title)
+                                    .textContent(TextContent)
+                                    .ok('OK')
+
+                    );
+                };
+
+                $scope.submitFormData = function() {
+
+                    $http.post("web/event/add", $scope.event).then(function successCallback(response) {
+                        if (response && response.data && response.data.code == '0') {
+                            $scope.showAlert("Info", "The data has been submitted successfully.");
+                        } else {
+                            $scope.showAlert("Error", "Failed to submit the data.");
+                        }
+                    }, function errorCallback(response) {
+                        $scope.showAlert("Error", "Failed to submit the data.");
+                    });
+                }
+
+                $scope.event = {
+                     taskId: '',
+                     taskName: '',
+                     startDate: '',
+                     completionDate: '',
+                     priority: '',
+                     actionBy: ''
+                }
+
+                function buildToggler(componentId) {
+                    return function() {
+                        $mdSidenav(componentId).toggle();
+                    };
+                }
+        });
     </script>
-    <header>
-        <md-toolbar layout="row" layout-align="start center">
-            <div class="md-toolbar-tools">
 
+    <div id="appForm" ng-controller="FormCtrl" layout="column" style="height:100%" ng-cloak>
+        <header>
+            <md-toolbar layout="row" layout-align="start center">
+                <div class="md-toolbar-tools">
+                    <md-button ng-click="toggleLeft()" class="md-raised md-primary">
+                        Menu
+                    </md-button>
+                </div>
+            </md-toolbar>
+        </header>
 
-            </div>
-        </md-toolbar>
-    </header>
+        <section layout="row" flex>
+            <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
+                <md-toolbar class="md-theme-indigo">
+                    <h1 class="md-toolbar-tools">Menu</h1>
+                </md-toolbar>
+
+                <md-content layout-margin>
+                    <p>
+                        This is menu.
+                    </p>
+                </md-content>
+            </md-sidenav>
+
+            <md-content flex layout-padding layout="row" layout-align="center">
+                <div class="md-whiteframe-1dp" flex="60" style="height:500px">
+                    <md-toolbar class="md-theme-indigo">
+                        <h1 class="md-toolbar-tools">Event Data</h1>
+                    </md-toolbar>
+
+                    <md-content layout-padding>
+                        <form name="eventForm">
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
+                                    <label>Task ID:</label>
+                                    <input ng-model="event.taskId" required>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
+                                    <label>Task Name:</label>
+                                    <input ng-model="event.taskName" required>
+                                </md-input-container>
+                            </div>
+
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
+                                    <label>Priority:</label>
+                                    <md-select ng-model="event.priority" placeholder="High" required>
+                                        <md-option value="High">High</md-option>
+                                        <md-option value="Medium">Medium</md-option>
+                                        <md-option value="Low">Low</md-option>
+                                    </md-select>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
+                                    <label>Action by:</label>
+                                    <input ng-model="event.actionBy" required>
+                                </md-input-container>
+                            </div>
+
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
+                                    <label>Start Date</label>
+                                    <md-datepicker ng-model="event.startDate" required></md-datepicker>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Completion Date</label>
+                                    <md-datepicker ng-model="event.completionDate"></md-datepicker>
+                                </md-input-container>
+                            </div>
+
+                            <div layout="row" layout-sm="column" layout-align="center">
+                                <md-button flex="50" class="md-primary md-raised" ng-click="cleanAllInput()">Clear</md-button>
+                                <md-button flex="50" class="md-primary md-raised" ng-click="submitFormData()" ng-disabled="eventForm.$invalid">Submit</md-button>
+                            </div>
+                        </form>
+                    </md-content>
+                </div>
+            </md-content>
+        </section>
+    </div>
 </body>
 </html>

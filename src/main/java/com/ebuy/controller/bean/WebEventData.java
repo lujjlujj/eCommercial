@@ -9,11 +9,21 @@ public class WebEventData {
 
     private String taskName;
 
-    private String action;
+    private String actionBy;
 
-    private String datetime;
+    private String startDate;
+
+    private String completionDate;
 
     private String priority;
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
 
     public String getTaskId() {
         return taskId;
@@ -31,27 +41,27 @@ public class WebEventData {
         this.taskName = taskName;
     }
 
-    public String getAction() {
-        return action;
+    public String getActionBy() {
+        return actionBy;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setActionBy(String actionBy) {
+        this.actionBy = actionBy;
     }
 
-    public String getDatetime() {
-        return datetime;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getPriority() {
-        return priority;
+    public String getCompletionDate() {
+        return completionDate;
     }
 
-    public void setPriority(String priority) {
-        this.priority = priority;
+    public void setCompletionDate(String completionDate) {
+        this.completionDate = completionDate;
     }
 }
