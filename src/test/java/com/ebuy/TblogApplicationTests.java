@@ -14,7 +14,7 @@ public class TblogApplicationTests {
 	public void contextLoads() {
 	}
 
-	//@Test
+	@Test
 	public void alwaysTrue() {
 		TestCase.assertTrue(true);
 	}
