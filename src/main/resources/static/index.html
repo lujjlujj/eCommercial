@@ -80,9 +80,14 @@
     <div id="appForm" ng-controller="FormCtrl" layout="column" style="height:100%" ng-cloak>
         <header>
             <md-toolbar layout="row" layout-align="start center">
-                <div class="md-toolbar-tools">
+                <div class="md-toolbar-tools" flex="90">
                     <md-button ng-click="toggleLeft()" class="md-raised md-primary">
                         Menu
+                    </md-button>
+                </div>
+                <div flex="10">
+                    <md-button href="/login?logout">
+                        Logout
                     </md-button>
                 </div>
             </md-toolbar>

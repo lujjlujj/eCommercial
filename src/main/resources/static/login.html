@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ebuy</title>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+</head>
+<body ng-app="ebuyApp" ng-cloak>
+<script type="text/javascript" src="js/angularjs/1.6.2/angular.min.js"></script>
+<script type="text/javascript" src="js/angularjs/1.6.2/angular-animate.min.js"></script>
+<script type="text/javascript" src="js/angularjs/1.6.2/angular-aria.min.js"></script>
+<script type="text/javascript" src="js/angularjs/1.6.2/angular-messages.min.js"></script>
+<script type="text/javascript" src="js/angularjs/1.6.2/angular-route.min.js"></script>
+<script type="text/javascript" src="js/angularjs/material/1.3.3/angular-material.min.js"></script>
+<script type="text/javascript">
+        var app = angular.module('ebuyApp',['ng', 'ngMaterial' , 'ngRoute']);
+
+        app.config(function ($mdThemingProvider) {
+            $mdThemingProvider.theme('default')
+                            .primaryPalette('purple')
+                            .accentPalette('green');
+
+        });
+
+        app.controller('FormCtrl', function($scope, $timeout, $mdSidenav, $http, $mdDialog, $httpParamSerializerJQLike) {
+                $scope.token = "";
+
+                $http.get("/", {headers:{'Content-Type':'application/x-www-form-urlencoded',
+                                'x-requested-with':'ajax'
+                        }}).then(function successCallback(response) {
+                        $scope.token = response.headers('X-CSRF-TOKEN');
+                }, function errorCallback(response) {
+
+                });
+
+                $scope.cleanAllInput = function() {
+                    $scope.event = {
+                        username: 'user',
+                        password: 'password',
+                        submit: 'login'
+                    };
+                }
+                $scope.showAlert = function(Title, TextContent) {
+                    $mdDialog.show(
+                                $mdDialog.alert()
+                                    .parent(angular.element(document.querySelector('#appForm')))
+                                    .clickOutsideToClose(true)
+                                    .title(Title)
+                                    .textContent(TextContent)
+                                    .ok('OK')
+
+                    );
+                };
+                //  'X-CSRF-TOKEN':$scope.token,
+                //              'X-CSRF-HEADER':'X-XSRF-TOKEN',
+                 //               'X-CSRF-PARAM':'_csrf'
+                $scope.submitFormData = function() {
+                    $http.post("/login", $httpParamSerializerJQLike($scope.event),
+                        {headers:{'Content-Type':'application/x-www-form-urlencoded',
+                                'x-requested-with':'ajax'
+                        }})
+                    .then(function successCallback(response) {
+                        if (response && response.status && response.status == '200' && response.data.success == 'true') {
+                            window.location = "/";
+                        } else {
+                            $scope.showAlert("Error", "Invalid Username and Password.");
+                        }
+                    }, function errorCallback(response) {
+                        $scope.showAlert("Error", "Failed to login because the service is not available.");
+                    });
+                }
+
+                $scope.event = {
+                        username: 'user',
+                        password: 'password',
+                        submit: 'login'
+                }
+        });
+    </script>
+
+<div id="appForm" ng-controller="FormCtrl" layout="column" style="height:100%" ng-cloak>
+    <header>
+        <md-toolbar layout="row" layout-align="start center">
+            <div class="md-toolbar-tools">
+            </div>
+        </md-toolbar>
+    </header>
+
+    <section layout="row" flex>
+        <md-content flex layout-padding layout="row" layout-align="center">
+            <div class="md-whiteframe-1dp" flex="50" style="height:350px">
+                <md-toolbar class="md-theme-indigo">
+                    <h1 class="md-toolbar-tools">Login</h1>
+                </md-toolbar>
+
+                <md-content layout-padding>
+                    <form name="eventForm">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Username:</label>
+                                <input ng-model="event.username" required>
+                            </md-input-container>
+
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Password:</label>
+                                <input type="password" ng-model="event.password" required>
+                            </md-input-container>
+
+                        <div layout="row" layout-sm="column" layout-align="center">
+                            <md-button flex="50" class="md-primary md-raised" ng-click="cleanAllInput()">Clear</md-button>
+                            <md-button flex="50" class="md-primary md-raised" ng-click="submitFormData()" ng-disabled="eventForm.$invalid">Submit</md-button>
+                        </div>
+                    </form>
+                </md-content>
+            </div>
+        </md-content>
+    </section>
+</div>
+</body>
+</html>
