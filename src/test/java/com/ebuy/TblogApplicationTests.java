@@ -17,5 +17,6 @@ public class TblogApplicationTests {
 	@Test
 	public void alwaysTrue() {
 		TestCase.assertTrue(true);
+		TestCase.assertFalse(false);
 	}
 }
