@@ -10,11 +10,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class TblogApplicationTests {
 
-	@Test
+	//@Test
 	public void contextLoads() {
 	}
 
-	@Test
+	//@Test
 	public void alwaysTrue() {
 		TestCase.assertTrue(true);
 	}
