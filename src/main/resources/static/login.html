@@ -25,13 +25,13 @@
         app.controller('FormCtrl', function($scope, $timeout, $mdSidenav, $http, $mdDialog, $httpParamSerializerJQLike) {
                 $scope.token = "";
 
-                $http.get("/", {headers:{'Content-Type':'application/x-www-form-urlencoded',
-                                'x-requested-with':'ajax'
-                        }}).then(function successCallback(response) {
-                        $scope.token = response.headers('X-CSRF-TOKEN');
-                }, function errorCallback(response) {
+              //  $http.get("/", {headers:{'Content-Type':'application/x-www-form-urlencoded',
+              //                  'x-requested-with':'ajax'
+              //          }}).then(function successCallback(response) {
+              //          $scope.token = response.headers('X-CSRF-TOKEN');
+              //  }, function errorCallback(response) {
 
-                });
+              //  });
 
                 $scope.cleanAllInput = function() {
                     $scope.event = {
@@ -51,9 +51,6 @@
 
                     );
                 };
-                //  'X-CSRF-TOKEN':$scope.token,
-                //              'X-CSRF-HEADER':'X-XSRF-TOKEN',
-                 //               'X-CSRF-PARAM':'_csrf'
                 $scope.submitFormData = function() {
                     $http.post("/login", $httpParamSerializerJQLike($scope.event),
                         {headers:{'Content-Type':'application/x-www-form-urlencoded',
@@ -88,7 +85,7 @@
 
     <section layout="row" flex>
         <md-content flex layout-padding layout="row" layout-align="center">
-            <div class="md-whiteframe-1dp" flex="50" style="height:350px">
+            <div class="md-whiteframe-1dp" flex="50" style="height:400px">
                 <md-toolbar class="md-theme-indigo">
                     <h1 class="md-toolbar-tools">Login</h1>
                 </md-toolbar>
@@ -108,6 +105,13 @@
                         <div layout="row" layout-sm="column" layout-align="center">
                             <md-button flex="50" class="md-primary md-raised" ng-click="cleanAllInput()">Clear</md-button>
                             <md-button flex="50" class="md-primary md-raised" ng-click="submitFormData()" ng-disabled="eventForm.$invalid">Submit</md-button>
+                        </div>
+                        <hr/>
+                        <div layout="row" layout-sm="column">
+                            <div>Login with following account:</div>
+                        </div>
+                        <div layout="row" layout-sm="column">
+                            <a href="/login/github"><img src="/img/github-logo.png" style="width:30px;height:30px;"/></a>
                         </div>
                     </form>
                 </md-content>
