@@ -24,6 +24,17 @@
         });
 
         app.controller('FormCtrl', function($scope, $timeout, $mdSidenav, $http, $mdDialog, $httpParamSerializerJQLike) {
+                $scope.icons = [];
+                $http.get("/web/img/oauth/icon")
+                .then(function successCallback(response) {
+                        if (response && response.status && response.status == '200' && response.data != null) {
+                            $scope.icons = response.data;
+                            alert(JSON.stringify($scope.icons));
+                        }
+                }, function errorCallback(response) {
+                      // Nothing to do
+                });
+
 
                 $scope.cleanAllInput = function() {
                     $scope.event = {
@@ -105,7 +116,9 @@
                             <div class="login-other-title">Login with following account:</div>
                         </div>
                         <div layout="row" layout-sm="column">
-                            <a href="/login/github"><img src="/img/github-logo.png" class="login-other-icon"/></a>
+                            <div ng-repeat="icon in icons">
+                                <a href="{{icon.url}}"><img src="/img/{{icon.iconName}}" class="login-other-icon"/></a>
+                            </div>
                         </div>
                     </form>
                 </md-content>
