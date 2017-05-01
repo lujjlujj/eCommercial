@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>ebuy</title>
     <link rel="stylesheet" href="css/angular-material.min.css">
+    <link rel="stylesheet" href="css/ebuy.css">
 </head>
 <body ng-app="ebuyApp" ng-cloak>
     <script type="text/javascript" src="js/angularjs/1.6.2/angular.min.js"></script>
@@ -77,13 +78,14 @@
         });
     </script>
 
-    <div id="appForm" ng-controller="FormCtrl" layout="column" style="height:100%" ng-cloak>
+    <div id="appForm" ng-controller="FormCtrl" layout="column" class="app-form" ng-cloak>
         <header>
             <md-toolbar layout="row" layout-align="start center">
                 <div class="md-toolbar-tools" flex="90">
-                    <md-button ng-click="toggleLeft()" class="md-raised md-primary">
-                        Menu
-                    </md-button>
+                    <!--<md-button ng-click="toggleLeft()" class="md-raised md-primary">-->
+                        <!--Menu-->
+                    <!--</md-button>-->
+                    <a href="#" ng-click="toggleLeft()"><img src="/img/menu.png" style="width:50px;height:30px"/></a>
                 </div>
                 <div flex="10">
                     <md-button href="/login?logout">
@@ -107,7 +109,7 @@
             </md-sidenav>
 
             <md-content flex layout-padding layout="row" layout-align="center">
-                <div class="md-whiteframe-1dp" flex="60" style="height:500px">
+                <div class="md-whiteframe-1dp event-input-section" flex="60">
                     <md-toolbar class="md-theme-indigo">
                         <h1 class="md-toolbar-tools">Event Data</h1>
                     </md-toolbar>

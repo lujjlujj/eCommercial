@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>ebuy</title>
     <link rel="stylesheet" href="css/angular-material.min.css">
+    <link rel="stylesheet" href="css/ebuy.css">
 </head>
 <body ng-app="ebuyApp" ng-cloak>
 <script type="text/javascript" src="js/angularjs/1.6.2/angular.min.js"></script>
@@ -23,15 +24,6 @@
         });
 
         app.controller('FormCtrl', function($scope, $timeout, $mdSidenav, $http, $mdDialog, $httpParamSerializerJQLike) {
-                $scope.token = "";
-
-              //  $http.get("/", {headers:{'Content-Type':'application/x-www-form-urlencoded',
-              //                  'x-requested-with':'ajax'
-              //          }}).then(function successCallback(response) {
-              //          $scope.token = response.headers('X-CSRF-TOKEN');
-              //  }, function errorCallback(response) {
-
-              //  });
 
                 $scope.cleanAllInput = function() {
                     $scope.event = {
@@ -40,6 +32,7 @@
                         submit: 'login'
                     };
                 }
+
                 $scope.showAlert = function(Title, TextContent) {
                     $mdDialog.show(
                                 $mdDialog.alert()
@@ -51,6 +44,7 @@
 
                     );
                 };
+
                 $scope.submitFormData = function() {
                     $http.post("/login", $httpParamSerializerJQLike($scope.event),
                         {headers:{'Content-Type':'application/x-www-form-urlencoded',
@@ -75,7 +69,7 @@
         });
     </script>
 
-<div id="appForm" ng-controller="FormCtrl" layout="column" style="height:100%" ng-cloak>
+<div id="appForm" ng-controller="FormCtrl" layout="column" class="app-form" ng-cloak>
     <header>
         <md-toolbar layout="row" layout-align="start center">
             <div class="md-toolbar-tools">
@@ -85,7 +79,7 @@
 
     <section layout="row" flex>
         <md-content flex layout-padding layout="row" layout-align="center">
-            <div class="md-whiteframe-1dp" flex="50" style="height:400px">
+            <div class="md-whiteframe-1dp login-input-section" flex="50">
                 <md-toolbar class="md-theme-indigo">
                     <h1 class="md-toolbar-tools">Login</h1>
                 </md-toolbar>
@@ -108,10 +102,10 @@
                         </div>
                         <hr/>
                         <div layout="row" layout-sm="column">
-                            <div>Login with following account:</div>
+                            <div class="login-other-title">Login with following account:</div>
                         </div>
                         <div layout="row" layout-sm="column">
-                            <a href="/login/github"><img src="/img/github-logo.png" style="width:30px;height:30px;"/></a>
+                            <a href="/login/github"><img src="/img/github-logo.png" class="login-other-icon"/></a>
                         </div>
                     </form>
                 </md-content>
