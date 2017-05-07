@@ -29,7 +29,6 @@
                 .then(function successCallback(response) {
                         if (response && response.status && response.status == '200' && response.data != null) {
                             $scope.icons = response.data;
-                            alert(JSON.stringify($scope.icons));
                         }
                 }, function errorCallback(response) {
                       // Nothing to do
