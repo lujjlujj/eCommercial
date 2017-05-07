@@ -18,8 +18,11 @@ import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticat
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfLogoutHandler;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers()
                     .and()
                 .authorizeRequests()
-                    .antMatchers("/login", "/login/**", "/js/**", "/css/**", "/img/**", "/web/img/**")
+                    .antMatchers("/login", "/login/**", "/js/**", "/css/**", "/img/**", "/web/img/**", "logout")
                     .permitAll().anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -61,7 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login").permitAll()
                     .and().
                 logout()
-                    .permitAll()
+                    .addLogoutHandler(new SecurityContextLogoutHandler())
+                    .addLogoutHandler(new CsrfLogoutHandler(securityCsrfTokenRepository))
+                    .addLogoutHandler(new CookieClearingLogoutHandler())
+                    .logoutSuccessHandler(new DefaultLogoutSuccessHandler())
                     .and()
                 .csrf()
                     .csrfTokenRepository(securityCsrfTokenRepository)

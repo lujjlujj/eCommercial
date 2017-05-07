@@ -61,6 +61,19 @@
                     });
                 }
 
+                $scope.logout = function() {
+
+                    $http.post("/logout").then(function successCallback(response) {
+                        if (response && response.status && response.status == '200' && response.data.success == 'true') {
+                            window.location = "/login";
+                        } else {
+                             $scope.showAlert("Error", "Failed to logout.");
+                        }
+                    }, function errorCallback(response) {
+                         $scope.showAlert("Error", "Failed to logout.");
+                    });
+                }
+
                 $scope.event = {
                      taskId: '',
                      taskName: '',
@@ -88,7 +101,7 @@
                     <a href="#" ng-click="toggleLeft()"><img src="/img/menu.png" class="menu-icon"/></a>
                 </div>
                 <div flex="10">
-                    <md-button href="/login?logout">
+                    <md-button ng-click="logout()">
                         Logout
                     </md-button>
                 </div>
