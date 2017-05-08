@@ -23,6 +23,9 @@
 
         });
 
+
+
+
         app.controller('FormCtrl', function($scope, $timeout, $mdSidenav, $http, $mdDialog) {
                 $scope.toggleLeft = buildToggler('left');
                 $scope.toggleRight = buildToggler('right');
@@ -36,6 +39,16 @@
                         actionBy: ''
                     };
                 }
+
+                $http.get("/user")
+                    .then(function successCallback(response) {
+                     if (response && response.status && response.status == '200' && response.data != null) {
+                            $scope.user = response.data;
+                     }
+                }, function errorCallback(response) {
+                      // Nothing to do
+                });
+
                 $scope.showAlert = function(Title, TextContent) {
                     $mdDialog.show(
                                 $mdDialog.alert()
@@ -68,9 +81,11 @@
                             window.location = "/login";
                         } else {
                              $scope.showAlert("Error", "Failed to logout.");
+                             //window.location = "/login";
                         }
                     }, function errorCallback(response) {
                          $scope.showAlert("Error", "Failed to logout.");
+                         //window.location = "/login";
                     });
                 }
 
@@ -94,13 +109,16 @@
     <div id="appForm" ng-controller="FormCtrl" layout="column" class="app-form" ng-cloak>
         <header>
             <md-toolbar layout="row" layout-align="start center">
-                <div class="md-toolbar-tools" flex="90">
+                <div class="md-toolbar-tools" flex="15">
                     <!--<md-button ng-click="toggleLeft()" class="md-raised md-primary">-->
                         <!--Menu-->
                     <!--</md-button>-->
                     <a href="#" ng-click="toggleLeft()"><img src="/img/menu.png" class="menu-icon"/></a>
                 </div>
-                <div flex="10">
+                <div flex="70">
+                    <label>Welcome: {{user.principal.username}}</label>
+                </div>
+                <div flex="15">
                     <md-button ng-click="logout()">
                         Logout
                     </md-button>
@@ -129,11 +147,11 @@
 
                     <md-content layout-padding>
                         <form name="eventForm">
-                            <div layout-gt-sm="row" layout-align="left">
+                            <div layout="row" layout-align="left">
                                 <a href="http://115.28.47.100:5601/app/kibana#/dashboard/Process-Event-Dashboard?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-30d,mode:quick,to:now))&_a=(filters:!(),options:(darkTheme:!f),panels:!((col:1,id:Operator-Task-Processing-Summary-Report,panelIndex:1,row:5,size_x:12,size_y:3,type:visualization),(col:1,id:Priority-Statistic-Report,panelIndex:2,row:3,size_x:6,size_y:2,type:visualization),(col:7,id:Task-Daily-Volume-Report,panelIndex:3,row:3,size_x:6,size_y:2,type:visualization),(col:1,id:Outstanding-Task-Daily-Report,panelIndex:4,row:1,size_x:12,size_y:2,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:'Process%20Event%20Dashboard',uiState:(P-1:(vis:(params:(sort:(columnIndex:!n,direction:!n))))))">Process Event Log Dashboard</a>
                             </div>
 
-                            <div layout-gt-sm="row">
+                            <div layout="row">
                                 <!--md-input-container class="md-block" flex-gt-sm md-no-asterisk>
                                     <label>Task ID:</label>
                                     <input ng-model="event.taskId" required>
@@ -152,7 +170,7 @@
                                 </md-input-container>
                             </div>
 
-                            <div layout-gt-sm="row">
+                            <div layout="row">
                                 <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
                                     <label>Priority:</label>
                                     <md-select ng-model="event.priority" required>
@@ -175,7 +193,7 @@
                                 </md-input-container>
                             </div>
 
-                            <div layout-gt-sm="row">
+                            <div layout="row">
                                 <md-input-container class="md-block" flex-gt-sm md-no-asterisk>
                                     <label>Start Date</label>
                                     <md-datepicker ng-model="event.startDate" required></md-datepicker>
