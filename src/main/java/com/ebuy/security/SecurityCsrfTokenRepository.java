@@ -35,7 +35,6 @@ public class SecurityCsrfTokenRepository implements CsrfTokenRepository {
     @Override
     public void saveToken(CsrfToken token, HttpServletRequest request, HttpServletResponse response) {
         String key = getKey(request);
-        System.out.println("Key:" + key + "token:"  + token.getToken());
         if (key == null)
             return;
 

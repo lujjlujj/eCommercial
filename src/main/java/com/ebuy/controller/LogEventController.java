@@ -67,7 +67,7 @@ public class LogEventController {
             response.setCode(WebResponse.CODE_ERROR);
             if (!StringUtils.isEmpty(postMethod.getResponseBodyAsString())) {
                 JSONObject result = new JSONObject(postMethod.getResponseBodyAsString());
-                if (result != null  && result.get("created").toString().equals("true")) {
+                if (result.get("created").toString().equals("true")) {
                     response.setCode(WebResponse.CODE_SUCCESS);
                 }
             }
